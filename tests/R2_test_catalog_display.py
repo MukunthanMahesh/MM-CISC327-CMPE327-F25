@@ -53,7 +53,7 @@ def test_display_catalog_ordered_by_title(tmp_path, monkeypatch):
     assert titles == sorted(titles)
 
 # verify displaying catalog can handle invalid data without breaking
-def test_display_catalog_invalid_copies(monkeypatch, tmp_path):
+def test_display_catalog_invalid_copies(tmp_path, monkeypatch):
     test_db = tmp_path / "test_library.db"
     monkeypatch.setattr("database.DATABASE", str(test_db))
     init_database()

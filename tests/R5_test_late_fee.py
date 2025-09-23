@@ -25,7 +25,7 @@ def test_late_fee_no_overdue(tmp_path, monkeypatch):
     assert result["days_overdue"] == 0
     assert "not overdue" in result["status"].lower()
 
-# verify late fee within 7 days overdue
+# verify late fee within a week overdue
 def test_late_fee_within_seven_days(tmp_path, monkeypatch):
     test_db = tmp_path / "test_library.db"
     monkeypatch.setattr("database.DATABASE", str(test_db))
@@ -44,7 +44,7 @@ def test_late_fee_within_seven_days(tmp_path, monkeypatch):
     assert result["days_overdue"] == 6
     assert "late fee calculated" in result["status"].lower()
 
-# verify late fee beyond 7 days overdue
+# verify late fee beyond a week overdue
 def test_late_fee_beyond_seven_days(tmp_path, monkeypatch):
     test_db = tmp_path / "test_library.db"
     monkeypatch.setattr("database.DATABASE", str(test_db))
@@ -82,7 +82,7 @@ def test_late_fee_maximum_cap(tmp_path, monkeypatch):
     assert result["days_overdue"] == 46
     assert "late fee calculated" in result["status"].lower()
 
-# verify no fee if patron never borrowed the book
+# verify no fee for patron who didn't borrow a book
 def test_late_fee_book_not_borrowed(tmp_path, monkeypatch):
     test_db = tmp_path / "test_library.db"
     monkeypatch.setattr("database.DATABASE", str(test_db))
